@@ -1,0 +1,24 @@
+.tfrow {
+  padding-top: 10px;
+  padding-bottom: 20px;
+}
+.tfrow .simplified {
+  color: #B7B7B7;
+}
+
+.tfrow .hyperlink {
+  color: #B7B7B7;
+  text-align:right;
+}
+
+.tfrow .fines .offense {
+  color: #FF3D08;
+}
+
+.tfrow .fines .muted {
+  color: #B7B7B7;
+}
+
+.tfrow, .tfrow h4, .tfrow h5, .tfrow h3, .tfrow h6  {
+  color: #494949;
+}

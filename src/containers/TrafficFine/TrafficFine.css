@@ -1,0 +1,73 @@
+h4.section-headline, h5.section-headline {
+  color: #336600;
+  font-family: Merriweather,Times,serif;
+}
+.container .centered {
+  display: block;
+    margin-right: auto;
+    margin-left: auto;
+}
+.traffic-fine-filters .dropdown.btn-group .dropdown-toggle.btn.btn-default {
+  width:100%;
+  background-color: #52730D;
+  border:none;
+  border-bottom: 1px solid #336600;
+  text-shadow:none;
+  box-shadow:none;
+  border-radius: 0px;
+  color:white;
+  padding-top:10px;
+  padding-bottom: 10px;
+}
+.traffic-fine-filters .dropdown.open.btn-group .dropdown-toggle.btn.btn-default {
+  background-color: white;
+  color:#52730D;
+  border-bottom: 1px solid #B7B7B7;
+  text-shadow:none;
+  box-shadow:none;
+}
+.traffic-fine-filters .dropdown.btn-group {
+  width:50%;
+}
+.traffic-fine-filters .dropdown-menu{
+  width: 200%;
+  margin: 0px;
+  border:0px solid #336600;
+  border-radius: 0px;
+}
+.traffic-fine-filters .dropdown-menu li{
+  margin-left: 0px;
+}
+.traffic-fine-filters .dropdown-menu li a{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-size: 16px;
+}
+.traffic-fine-city-dropdown-parent .dropdown-menu{
+  left : -100%;
+}
+
+.traffic-fine-selector h3 {
+  color: #494949;
+}
+.traffic-fine-selector{
+  color: #717171;
+}
+
+.traffic-fine-selector h5 {
+  color: black;
+  font-weight: bold;
+}
+.traffic-fine-selector-name {
+  color: #B7B7B7;
+  font-weight: bold;
+}
+.traffic-fine-selector-name:hover {
+  color: #B7B7B7;
+  text-decoration: none;
+  font-weight: bold;
+}
+.traffic-fine-selector-button:hover {
+  color: #B7B7B7;
+  text-decoration: none;
+}

@@ -1,0 +1,14 @@
+{
+  "env": {
+    "development": {
+      "plugins": [
+        [
+          "babel-plugin-transform-require-ignore",
+          {
+            "extensions": [".css", ".sass"]
+          }
+        ]
+      ]
+    }
+  }
+}

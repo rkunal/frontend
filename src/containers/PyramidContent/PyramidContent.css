@@ -1,0 +1,29 @@
+
+
+.nyaaya-app-content-container .arrow-navigation.btn-link {
+  position: absolute;
+  top: 200px;
+  bottom: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+  font-size: 32px;
+  color: #ccc;
+  text-align: center;
+  text-decoration: none;
+}
+
+
+.nyaaya-app-content-container .arrow-navigation.btn-link:focus {
+  outline: 0px;
+}
+
+
+/*Custom Article*/
+.article-published-date {
+  font-size: 12px;
+  color: #b7b7b7;
+  text-align: right;
+}

@@ -1,0 +1,44 @@
+    .catalogue-item:hover {
+      background-color:#f5f5f5;
+      border:0px solid #f5f5f5;
+    }
+    .catalogue-item {
+      border:0px solid #f5f5f5;
+      padding:8px 8px 8px 40px;
+      text-align: left;
+      line-height: 2;
+    }
+    .catalogue-header h1 {
+      color: #52730D;
+    }
+    .catalogue-header .nav-tabs {
+      border-bottom: 1px solid #52730D;
+    }
+    .catalogue-header .nav-tabs>li.active>a, .catalogue-header .nav-tabs>li.active>a:focus, 
+    .catalogue-header .nav-tabs>li.active>a:hover {
+      color: #52730D;
+      border-bottom: 2px solid #52730D;
+      border-top-width:0px;
+      border-left-width:0px;
+      border-right-width:0px;
+      font-weight: bold;
+    }
+    .catalogue-header .nav-tabs>li>a {
+      border-top-width:0px;
+      border-left-width:0px;
+      border-right-width:0px;      
+    }
+    .catalogue-header a:hover, .catalogue-header a:visited  {
+      color: #52730D;
+      border-width:0px;
+      background-color:inherit;
+      text-decoration: none;
+    }
+    .table>tbody>tr>td.catalogue-list-td {
+      padding: 0px;
+      border-top-width:0px;
+      border-bottom: 1px solid #ddd;
+    }
+    .nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover {
+      background-color: #52730D;
+    }
