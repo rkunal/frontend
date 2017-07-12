@@ -3,10 +3,12 @@
   "version": "0.1.0",
   "description": "Frontend for http://nyaaya.in",
   "author": "Kunal Rachhoya",
-  "contributors": [{
-    "name": "Kanika Saini",
-    "url": "https://github.com/kanikasaini"
-  }],
+  "contributors": [
+    {
+      "name": "Kanika Saini",
+      "url": "https://github.com/kanikasaini"
+    }
+  ],
   "keywords": [
     "india",
     "laws",
@@ -23,6 +25,8 @@
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
+    "enzyme": "^2.9.1",
+    "react-addons-test-utils": "^15.4.2",
     "react-scripts": "0.8.4"
   },
   "dependencies": {
