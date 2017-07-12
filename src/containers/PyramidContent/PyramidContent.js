@@ -25,7 +25,7 @@ const NavButton = (url, title, cn) => (
   </LinkContainer>
 );
 
-const renderPublishedDate = articlePublishedDate => {
+export const renderPublishedDate = articlePublishedDate => {
   const date = new Date(articlePublishedDate);
   const date_s = date.toDateString();
   const date_arr = date_s.split(" ");
