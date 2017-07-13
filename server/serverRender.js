@@ -5,7 +5,7 @@ import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { match, RouterContext } from "react-router";
 import routes from "./serverRoutes";
-import DataProvider from "./DataProvider";
+import DataProvider from "./dataProvider";
 import ga from "./ga";
 
 module.exports = function serverRender(req, res, next) {
@@ -15,6 +15,7 @@ module.exports = function serverRender(req, res, next) {
 
   const filePath = path.resolve(__dirname, "..", "build", "index.html");
   fs.readFile(filePath, "utf8", (err, htmlData) => {
+    htmlData = htmlData.replace('{% include "./seo_tags.html" %}', "");
     if (err) {
       console.error("read err", err);
       return res.status(404).end();

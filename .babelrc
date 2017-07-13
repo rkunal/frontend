@@ -1,6 +1,18 @@
 {
   "env": {
     "development": {
+      "presets": ["react-app"],
+      "plugins": [
+        [
+          "babel-plugin-transform-require-ignore",
+          {
+            "extensions": [".css", ".sass"]
+          }
+        ]
+      ]
+    },
+    "production": {
+      "presets": ["react-app"],
       "plugins": [
         [
           "babel-plugin-transform-require-ignore",
