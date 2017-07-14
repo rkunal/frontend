@@ -17,13 +17,12 @@ import TocItem from "../../components/Navigation/TocItem.js";
 import "./PyramidContent.css";
 import Config from "./Config.js";
 
-const NavButton = (url, title, cn) => (
+const NavButton = (url, title, cn) =>
   <LinkContainer to={url}>
     <Button bsStyle="link" className="arrow-navigation">
       <Glyphicon glyph={cn} /> {title}{" "}
     </Button>
-  </LinkContainer>
-);
+  </LinkContainer>;
 
 export const renderPublishedDate = articlePublishedDate => {
   const date = new Date(articlePublishedDate);
@@ -39,7 +38,7 @@ export const renderPublishedDate = articlePublishedDate => {
   );
 };
 
-const renderTocList = (node, index) => (
+const renderTocList = (node, index) =>
   <TocItem
     key={index}
     title={node.name}
@@ -53,8 +52,7 @@ const renderTocList = (node, index) => (
           {node.children.map((n, i) => renderTocList(n, i))}
         </TocItemList>
       : null}
-  </TocItem>
-);
+  </TocItem>;
 
 const renderToc = (showSidebar, navs) => {
   if (showSidebar) {
@@ -79,15 +77,15 @@ class PyramidContent extends Component {
       next: null,
       prev: null
     };
-      this.state = {
-        app: {},
-        tocs: [],
-        doc: null,
-        html: "",
-        urls: urls,
-        seo: null,
-        related_content: []
-      };
+    this.state = {
+      app: {},
+      tocs: [],
+      doc: null,
+      html: "",
+      urls: urls,
+      seo: null,
+      related_content: []
+    };
     this.app_pathname = props.location.pathname;
     if (this.app_pathname.split("/")[1] === props.lang) {
       this.app_pathname = props.location.pathname.substr(3);
@@ -121,12 +119,13 @@ class PyramidContent extends Component {
   fetchIniData(props) {
     PubSub.publish("LOADER_UPDATE", 10);
     let myHeaders = new Headers();
-    if(this.props.lang === "hi")
+    if (this.props.lang === "hi") {
       myHeaders.set("Accept-Language", "hi");
-    else
+    } else {
       myHeaders.set("Accept-Language", "en-us");
+    }
     let myInit = {
-               headers: myHeaders,
+      headers: myHeaders
     };
     fetch(`${this.props.apiRootUrl}/${this.apiPath}`, myInit)
       .then(response => {
@@ -169,9 +168,7 @@ class PyramidContent extends Component {
         <div>
           <SeoTags seo={this.state.seo} apiRoot={this.props.apiRootUrl} />
           <Grid
-            className={
-              `nyaaya-apps-container-${this.state.app.lang.toLowerCase()}`
-            }
+            className={`nyaaya-apps-container-${this.state.app.lang.toLowerCase()}`}
           >
             <Row>
               <Col
@@ -217,14 +214,14 @@ class PyramidContent extends Component {
                 {this.state.related_content.length
                   ? <div className="text-center">
                       <h6 className="section-headline">Related Content</h6>
-                      {this.state.related_content.map((item, index) => (
+                      {this.state.related_content.map((item, index) =>
                         <ContentCard
                           key={index}
                           Title={item.name}
                           Url={item.url}
                           imageUrl={item.illustration}
                         />
-                      ))}
+                      )}
                     </div>
                   : null}
               </Col>
