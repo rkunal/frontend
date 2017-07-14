@@ -23,10 +23,10 @@ const get = url => {
     });
 };
 
-const HomePage = () => get(`${apiRoot}/?json`);
-const GuidePage = () => get(`${apiRoot}/guides/?json`);
+const HomePage = () => get(`${apiRoot}/api/homepage/`);
+const GuidePage = () => get(`${apiRoot}/api/guides/`);
 
-const CataloguePage = url => get(`${apiRoot}${url}?json`);
+const CataloguePage = url => get(`${apiRoot}/api${url}`);
 
 const api = { HomePage, GuidePage, CataloguePage };
 export default api;

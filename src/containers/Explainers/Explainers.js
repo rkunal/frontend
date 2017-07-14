@@ -131,9 +131,17 @@ class Explainers extends Component {
     }
     this.fetchIniData(nextProps);
   }
-  fetchIniData() {
+    fetchIniData() {
     this.setState({ isLoading: true });
-    fetch(`${this.props.apiRoot}${this.apiPath}`)
+    let myHeaders = new Headers();
+    if(this.props.lang === "hi")
+      myHeaders.set("Accept-Language", "hi");
+    else
+      myHeaders.set("Accept-Language", "en-us");
+    let myInit = {
+               headers: myHeaders,
+    };
+    fetch(`${this.props.apiRoot}${this.apiPath}` , myInit )
       .then(response => response.json())
       .then(json => {
         if (!this.hasUnmounted) {

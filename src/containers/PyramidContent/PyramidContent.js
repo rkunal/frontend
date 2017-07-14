@@ -79,18 +79,6 @@ class PyramidContent extends Component {
       next: null,
       prev: null
     };
-    if (this.props.serverSharedData.doc) {
-      const json = this.props.serverSharedData;
-      this.state = {
-        app: json.app,
-        tocs: json.tocs,
-        doc: json.doc,
-        html: json.html,
-        urls: json.urls,
-        seo: json.seo,
-        related_content: json.related_content
-      };
-    } else {
       this.state = {
         app: {},
         tocs: [],
@@ -100,7 +88,6 @@ class PyramidContent extends Component {
         seo: null,
         related_content: []
       };
-    }
     this.app_pathname = props.location.pathname;
     if (this.app_pathname.split("/")[1] === props.lang) {
       this.app_pathname = props.location.pathname.substr(3);
@@ -133,7 +120,15 @@ class PyramidContent extends Component {
 
   fetchIniData(props) {
     PubSub.publish("LOADER_UPDATE", 10);
-    fetch(`${this.props.apiRootUrl}/${this.apiPath}`)
+    let myHeaders = new Headers();
+    if(this.props.lang === "hi")
+      myHeaders.set("Accept-Language", "hi");
+    else
+      myHeaders.set("Accept-Language", "en-us");
+    let myInit = {
+               headers: myHeaders,
+    };
+    fetch(`${this.props.apiRootUrl}/${this.apiPath}`, myInit)
       .then(response => {
         if (response.status === 200) {
           PubSub.publish("LOADER_UPDATE", 80);
