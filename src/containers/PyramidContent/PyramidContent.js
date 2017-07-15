@@ -89,10 +89,6 @@ class PyramidContent extends Component {
     this.app_pathname = props.location.pathname;
     if (this.app_pathname.split("/")[1] === props.lang) {
       this.app_pathname = props.location.pathname.substr(3);
-
-      this.apiPath = "api/" + props.lang + "/app" + this.app_pathname;
-    } else {
-      this.apiPath = "api/app" + this.app_pathname;
     }
   }
   componentDidMount() {
@@ -106,9 +102,6 @@ class PyramidContent extends Component {
     this.app_pathname = nextProps.location.pathname;
     if (this.app_pathname.split("/")[1] === nextProps.lang) {
       this.app_pathname = nextProps.location.pathname.substr(3);
-      this.apiPath = "api/" + nextProps.lang + "/app" + this.app_pathname;
-    } else {
-      this.apiPath = "api/app" + this.app_pathname;
     }
     this.fetchIniData(nextProps);
   }
@@ -119,7 +112,7 @@ class PyramidContent extends Component {
   fetchIniData(props) {
     PubSub.publish("LOADER_UPDATE", 10);
     let myHeaders = new Headers();
-    if (this.props.lang === "hi") {
+    if (props.lang === "hi") {
       myHeaders.set("Accept-Language", "hi");
     } else {
       myHeaders.set("Accept-Language", "en-us");
@@ -127,7 +120,7 @@ class PyramidContent extends Component {
     let myInit = {
       headers: myHeaders
     };
-    fetch(`${this.props.apiRootUrl}/${this.apiPath}`, myInit)
+    fetch(`${this.props.apiRootUrl}/api/app${this.app_pathname}`, myInit)
       .then(response => {
         if (response.status === 200) {
           PubSub.publish("LOADER_UPDATE", 80);

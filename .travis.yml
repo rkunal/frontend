@@ -4,8 +4,6 @@ node_js:
 cache:
   directories:
     - node_modules
-before_install:
-  - npm install -g coveralls
 script:
   - npm install
-  - npm test -- --coverage && cat ./coverage/lcov.info | coveralls
+  - npm test

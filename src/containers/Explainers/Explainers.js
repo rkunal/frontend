@@ -115,26 +115,16 @@ class Explainers extends Component {
   constructor(props) {
     super(props);
     this.state = { explainers_items: [], seo: {}, webdocs: [] };
-    this.defaultError = "Error while fetching data";
-    this.apiPath = "/api/law-explainers/";
-    if (props.lang === "hi") {
-      this.apiPath = "/api/hi/law-explainers/";
-    }
   }
   componentWillMount() {
     this.fetchIniData(this.props);
   }
   componentWillReceiveProps(nextProps) {
-    this.apiPath = "/api/law-explainers/";
-    if (nextProps.lang === "hi") {
-      this.apiPath = "/api/hi/law-explainers/";
-    }
     this.fetchIniData(nextProps);
   }
-  fetchIniData() {
-    this.setState({ isLoading: true });
+  fetchIniData(props) {
     let myHeaders = new Headers();
-    if (this.props.lang === "hi") {
+    if (props.lang === "hi") {
       myHeaders.set("Accept-Language", "hi");
     } else {
       myHeaders.set("Accept-Language", "en-us");
@@ -142,7 +132,7 @@ class Explainers extends Component {
     let myInit = {
       headers: myHeaders
     };
-    fetch(`${this.props.apiRoot}${this.apiPath}`, myInit)
+    fetch(`${this.props.apiRoot}/api/law-explainers/`, myInit)
       .then(response => response.json())
       .then(json => {
         if (!this.hasUnmounted) {
