@@ -88,7 +88,7 @@ class Laws extends React.Component {
 
   fetchIniData(props) {
     PubSub.publish("LOADER_UPDATE", 10);
-    fetch(`${props.apiRootUrl}/api/ldp/${props.params.law_id}/`)
+    fetch(`${props.apiRootUrl}/api/law/${props.params.law_id}/`)
       .then(response => response.json())
       .then(json => {
         if (!this.hasUnmounted) {
