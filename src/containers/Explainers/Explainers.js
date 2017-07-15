@@ -9,6 +9,7 @@ import Row from "react-bootstrap/lib/Row";
 import Button from "react-bootstrap/lib/Button";
 import { LinkContainer } from "react-router-bootstrap";
 import Clearfix from "react-bootstrap/lib/Clearfix";
+import api from "../../api/api";
 
 const ExplainList = items => {
   const groupSize = 4;
@@ -114,30 +115,27 @@ const HindiExplainers = items => {
 class Explainers extends Component {
   constructor(props) {
     super(props);
-    this.state = { explainers_items: [], seo: {}, webdocs: [] };
-  }
-  componentWillMount() {
+    if (this.props.serverSharedData.explainers !== undefined) {
+      const json = this.props.serverSharedData;
+    this.state = { explainers_items: json.explainers, seo: json.seo };
+} else {
+    this.state = { explainers_items: [], seo: {} };
+}
+}
+  componentDidMount() {
+	  if(this.state.explainers_items.length === 0){
     this.fetchIniData(this.props);
+	  }
   }
   componentWillReceiveProps(nextProps) {
     this.fetchIniData(nextProps);
   }
   fetchIniData(props) {
-    let myHeaders = new Headers();
-    if (props.lang === "hi") {
-      myHeaders.set("Accept-Language", "hi");
-    } else {
-      myHeaders.set("Accept-Language", "en-us");
-    }
-    let myInit = {
-      headers: myHeaders
-    };
-    fetch(`${this.props.apiRoot}/api/law-explainers/`, myInit)
+    api.LawExplainersPage(props.lang)
       .then(response => response.json())
       .then(json => {
         if (!this.hasUnmounted) {
           this.setState({
-            isLoading: false,
             explainers_items: json.explainers,
             seo: json.seo
           });

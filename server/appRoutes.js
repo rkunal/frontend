@@ -29,7 +29,44 @@ router.get(
       .GuidePage()
       .then(response => response.json())
       .then(json => {
-        json = response.json();
+        res.locals.ssrData = json;
+        next();
+      })
+      .catch(function(ex) {
+        console.log("parsing failed", ex);
+        res.locals.ssrData = {};
+        next();
+      });
+  },
+  serverRender
+);
+
+router.get(
+  "/law-explainers/",
+  function(req, res, next) {
+    api
+      .LawExplainersPage()
+      .then(response => response.json())
+      .then(json => {
+        res.locals.ssrData = json;
+        next();
+      })
+      .catch(function(ex) {
+        console.log("parsing failed", ex);
+        res.locals.ssrData = {};
+        next();
+      });
+  },
+  serverRender
+);
+
+router.get(
+  "/:lang/law-explainers/",
+  function(req, res, next) {
+    api
+      .LawExplainersPage(req.params.lang)
+      .then(response => response.json())
+      .then(json => {
         res.locals.ssrData = json;
         next();
       })
