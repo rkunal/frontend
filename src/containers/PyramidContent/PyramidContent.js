@@ -16,13 +16,15 @@ import TocItemList from "../../components/Navigation/TocItemList.js";
 import TocItem from "../../components/Navigation/TocItem.js";
 import "./PyramidContent.css";
 import Config from "./Config.js";
+import api from "../../api/api";
 
-const NavButton = (url, title, cn) =>
+const NavButton = (url, title, cn) => (
   <LinkContainer to={url}>
     <Button bsStyle="link" className="arrow-navigation">
       <Glyphicon glyph={cn} /> {title}{" "}
     </Button>
-  </LinkContainer>;
+  </LinkContainer>
+);
 
 export const renderPublishedDate = articlePublishedDate => {
   const date = new Date(articlePublishedDate);
@@ -38,7 +40,7 @@ export const renderPublishedDate = articlePublishedDate => {
   );
 };
 
-const renderTocList = (node, index) =>
+const renderTocList = (node, index) => (
   <TocItem
     key={index}
     title={node.name}
@@ -52,7 +54,8 @@ const renderTocList = (node, index) =>
           {node.children.map((n, i) => renderTocList(n, i))}
         </TocItemList>
       : null}
-  </TocItem>;
+  </TocItem>
+);
 
 const renderToc = (showSidebar, navs) => {
   if (showSidebar) {
@@ -77,15 +80,33 @@ class PyramidContent extends Component {
       next: null,
       prev: null
     };
-    this.state = {
-      app: {},
-      tocs: [],
-      doc: null,
-      html: "",
-      urls: urls,
-      seo: null,
-      related_content: []
-    };
+
+    if (
+      props.serverSharedData.urls !== undefined &&
+      props.serverSharedData.urls.current === props.location.pathname
+    ) {
+      const json = props.serverSharedData;
+      this.state = {
+        app: json.app,
+        tocs: json.tocs,
+        doc: json.doc,
+        html: json.doc.plain_text,
+        urls: json.urls,
+        seo: json.seo,
+        related_content: json.related_content
+      };
+    } else {
+      this.state = {
+        app: {},
+        tocs: [],
+        doc: null,
+        html: "",
+        urls: urls,
+        seo: null,
+        related_content: []
+      };
+    }
+
     this.app_pathname = props.location.pathname;
     if (this.app_pathname.split("/")[1] === props.lang) {
       this.app_pathname = props.location.pathname.substr(3);
@@ -111,16 +132,8 @@ class PyramidContent extends Component {
 
   fetchIniData(props) {
     PubSub.publish("LOADER_UPDATE", 10);
-    let myHeaders = new Headers();
-    if (props.lang === "hi") {
-      myHeaders.set("Accept-Language", "hi");
-    } else {
-      myHeaders.set("Accept-Language", "en-us");
-    }
-    let myInit = {
-      headers: myHeaders
-    };
-    fetch(`${this.props.apiRootUrl}/api/app${this.app_pathname}`, myInit)
+    api
+      .PyramidContent(`/app${this.app_pathname}`, props.lang)
       .then(response => {
         if (response.status === 200) {
           PubSub.publish("LOADER_UPDATE", 80);
@@ -161,7 +174,9 @@ class PyramidContent extends Component {
         <div>
           <SeoTags seo={this.state.seo} apiRoot={this.props.apiRootUrl} />
           <Grid
-            className={`nyaaya-apps-container-${this.state.app.lang.toLowerCase()}`}
+            className={
+              `nyaaya-apps-container-${this.state.app.lang.toLowerCase()}`
+            }
           >
             <Row>
               <Col
@@ -207,14 +222,14 @@ class PyramidContent extends Component {
                 {this.state.related_content.length
                   ? <div className="text-center">
                       <h6 className="section-headline">Related Content</h6>
-                      {this.state.related_content.map((item, index) =>
+                      {this.state.related_content.map((item, index) => (
                         <ContentCard
                           key={index}
                           Title={item.name}
                           Url={item.url}
                           imageUrl={item.illustration}
                         />
-                      )}
+                      ))}
                     </div>
                   : null}
               </Col>

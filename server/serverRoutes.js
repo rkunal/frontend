@@ -11,7 +11,7 @@ import Guides from "../src/containers/Guides/Guides";
 
 import Intro from "../src/containers/Explainers/Intro";
 import PyramidContent from "../src/containers/PyramidContent/PyramidContent";
-
+import Laws from "../src/containers/Laws/Laws";
 import TrafficFine from "../src/containers/TrafficFine/TrafficFine";
 import Search from "../src/containers/Search/Search";
 
@@ -41,6 +41,7 @@ export default (
         component={Catalogue}
       />
 
+      <Route path="/law/:law_id/:law_slug/" component={Laws} />
       <Route path="traffic-fine/" component={TrafficFine} />
       <Route path="traffic-fine/:slug/" component={TrafficFine} />
 

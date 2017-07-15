@@ -31,10 +31,17 @@ const get = (url, lang) => {
 
 const HomePage = () => get(`${apiRoot}/api/homepage/`);
 const GuidePage = () => get(`${apiRoot}/api/guides/`);
-
 const CataloguePage = url => get(`${apiRoot}/api${url}`);
-
 const LawExplainersPage = lang => get(`${apiRoot}/api/law-explainers/`, lang);
+const PyramidContent = (url, lang) => get(`${apiRoot}/api${url}`, lang);
+const LawPage = id => get(`${apiRoot}/api/law/${id}/`);
 
-const api = { HomePage, GuidePage, CataloguePage, LawExplainersPage };
+const api = {
+  HomePage,
+  GuidePage,
+  CataloguePage,
+  LawExplainersPage,
+  PyramidContent,
+  LawPage
+};
 export default api;

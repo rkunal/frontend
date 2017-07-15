@@ -42,6 +42,25 @@ router.get(
 );
 
 router.get(
+  "/law/:id/:slug/",
+  function(req, res, next) {
+    api
+      .LawPage(req.params.id)
+      .then(response => response.json())
+      .then(json => {
+        res.locals.ssrData = json;
+        next();
+      })
+      .catch(function(ex) {
+        console.log("parsing failed", ex);
+        res.locals.ssrData = {};
+        next();
+      });
+  },
+  serverRender
+);
+
+router.get(
   "/law-explainers/",
   function(req, res, next) {
     api
@@ -84,6 +103,29 @@ router.get(
   function(req, res, next) {
     api
       .CataloguePage(req.url)
+      .then(response => response.json())
+      .then(json => {
+        res.locals.ssrData = json;
+        next();
+      })
+      .catch(function(ex) {
+        console.log("parsing failed", ex);
+        res.locals.ssrData = {};
+        next();
+      });
+  },
+  serverRender
+);
+
+router.get(
+  "/:lang/*",
+  function(req, res, next) {
+    let url = req.url;
+    if (req.params.lang === "hi") {
+      url = req.url.substr(3);
+    }
+    api
+      .PyramidContent("/app" + url, req.params.lang)
       .then(response => response.json())
       .then(json => {
         res.locals.ssrData = json;

@@ -7,7 +7,7 @@ import SeoTags from "../../components/SeoTags";
 import "./Laws.css";
 
 import PubSub from "pubsub-js";
-
+import api from "../../api/api";
 import Col from "react-bootstrap/lib/Col";
 import Row from "react-bootstrap/lib/Row";
 import Grid from "react-bootstrap/lib/Grid";
@@ -50,8 +50,8 @@ const renderTocList = (node, index, url) => (
 class Laws extends React.Component {
   constructor(props) {
     super(props);
-    if (this.props.serverSharedData.title !== undefined) {
-      const json = this.props.serverSharedData;
+    if (props.serverSharedData.is_stub !== undefined) {
+      const json = props.serverSharedData;
       this.state = {
         html: json.html,
         intro: json.intro,
@@ -88,7 +88,8 @@ class Laws extends React.Component {
 
   fetchIniData(props) {
     PubSub.publish("LOADER_UPDATE", 10);
-    fetch(`${props.apiRootUrl}/api/law/${props.params.law_id}/`)
+    api
+      .LawPage(props.params.law_id)
       .then(response => response.json())
       .then(json => {
         if (!this.hasUnmounted) {

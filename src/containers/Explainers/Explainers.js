@@ -117,21 +117,22 @@ class Explainers extends Component {
     super(props);
     if (this.props.serverSharedData.explainers !== undefined) {
       const json = this.props.serverSharedData;
-    this.state = { explainers_items: json.explainers, seo: json.seo };
-} else {
-    this.state = { explainers_items: [], seo: {} };
-}
-}
+      this.state = { explainers_items: json.explainers, seo: json.seo };
+    } else {
+      this.state = { explainers_items: [], seo: {} };
+    }
+  }
   componentDidMount() {
-	  if(this.state.explainers_items.length === 0){
-    this.fetchIniData(this.props);
-	  }
+    if (this.state.explainers_items.length === 0) {
+      this.fetchIniData(this.props);
+    }
   }
   componentWillReceiveProps(nextProps) {
     this.fetchIniData(nextProps);
   }
   fetchIniData(props) {
-    api.LawExplainersPage(props.lang)
+    api
+      .LawExplainersPage(props.lang)
       .then(response => response.json())
       .then(json => {
         if (!this.hasUnmounted) {
